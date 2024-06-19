@@ -22,12 +22,19 @@ public class contact : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other) 
+    void OnCollisionEnter(Collision other) {
+    if (other.transform.parent != null && other.transform.parent.gameObject.name == "wall")
     {
-        if (other.transform.parent.gameObject.name == "wall")
+        CountactCount++;
+        if (ContactText != null)
         {
-            CountactCount++;
             ContactText.text = string.Format("Hit wall {0}", CountactCount);
         }
+        else
+        {
+            Debug.LogError("ContactText is not assigned in the inspector.");
+        }
     }
+    }
+
 }
