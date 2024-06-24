@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 3699271}
   - component: {fileID: 3699270}
   - component: {fileID: 3699269}
-  - component: {fileID: 3699268}
   - component: {fileID: 3699272}
   m_Layer: 0
   m_Name: "\u79FB\u52D5\u5E8A"
@@ -159,18 +158,6 @@ Transform:
   m_Father: {fileID: 653249847}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3699268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3699266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc1c4f9c67f4eaf438b0b9bf6f7a1cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &3699269
 BoxCollider:
   m_ObjectHideFlags: 0
