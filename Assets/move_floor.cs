@@ -20,9 +20,6 @@ public class move_floor : MonoBehaviour
     {
         myTransform = this.transform;
         position_now = src.transform.position;
-        // コンソールにsrcとdstの位置を表示
-        Debug.Log("src: " + src.transform.position);
-        Debug.Log("dst: " + dst.transform.position);        
     }
 
     // Update is called once per frame
@@ -34,8 +31,6 @@ public class move_floor : MonoBehaviour
         // mode = 3 待機
         // 2つのオブジェクトの間を行ったり来たりする
         // 2つのオブジェクトの位置から移動方向を決定
-        Debug.Log("now: " + position_now);
-
 
         switch (mode)
         {

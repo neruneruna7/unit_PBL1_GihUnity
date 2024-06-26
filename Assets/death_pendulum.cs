@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class death_pendulum : MonoBehaviour
 {
+    [SerializeField] int delay;
+    [SerializeField] float x_rotate;
+    [SerializeField] float y_rotate;
+    [SerializeField] float z_rotate;
+
+    bool isWaiting = true;
+    int delayCount = 0;
+
     Transform pendulum;
-    // Vector3 origin = new Vector3(0f, 3f, 0f);
-    // Vector3 axis = new Vector3(0f, 0f, 1f);
     Vector3 position;
     int mode = 0;
-    int count = 0;
+    // int count = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +27,18 @@ public class death_pendulum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pendulum.Rotate(0f, 0f, 4f);
+        if (isWaiting)
+        {
+            delayCount++;
+            if (delayCount >= delay)
+            {
+                isWaiting = false;
+                delayCount = 0;
+            }
+            return;
+        }
+
+        pendulum.Rotate(x_rotate, y_rotate, z_rotate);
         // pendulum.RotateAround(origin, axis, 1f); // origin を中心に axis 周りに５度回転する
         // if (mode == 0)
         // {
