@@ -11,6 +11,7 @@ public class move : MonoBehaviour
     public float moveSpeed = 5f;  // 移動速度
     public float rotationSpeed = 200f; // 回転速度を増加
     public float jumpForce = 10f;  // ジャンプの強さ
+    public float vision = 0f; //初期視点
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class move : MonoBehaviour
         
         // ゲームのフレームレートを 60 FPS に設定
         Application.targetFrameRate = 60;
+
+        
     }
 
     void Update()
@@ -46,6 +49,11 @@ public class move : MonoBehaviour
         {
             moveHorizontal -= 1f; // 左移動
         }
+
+        // 視点の回転 (マウスの横移動で)
+        vision = Input.GetAxis("Mouse X") * rotationSpeed * 0.25f;
+        transform.Rotate(0f, vision, 0f);
+        
 
         // 位置の変更
         Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
