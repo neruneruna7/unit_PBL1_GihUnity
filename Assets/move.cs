@@ -8,10 +8,10 @@ public class move : MonoBehaviour
     private Rigidbody rb;
 
     // 移動速度と回転速度の調整
-    public float moveSpeed = 5f;  // 移動速度
-    public float rotationSpeed = 100f; // 回転速度を増加
-    public float jumpForce = 10f;  // ジャンプの強さ
-    public float vision = 0f; //視点
+    float moveSpeed = 2f;  // 移動速度
+    float rotationSpeed = 10f; // 回転速度を増加
+    float jumpForce = 5f;  // ジャンプの強さ
+    float vision = 0f;
 
     void Start()
     {
@@ -65,8 +65,7 @@ public class move : MonoBehaviour
         
         //移動処理
         Vector3 velocity = moveDirection * moveSpeed * Time.deltaTime;
-        velocity.y = rb.velocity.y; // 現在のY軸速度を保持 (ジャンプなど)
-        rb.velocity = transform.TransformDirection(velocity);
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
 
         // スペースキーでジャンプ
         if (Input.GetKeyDown(KeyCode.Space))
