@@ -22,7 +22,7 @@ public class rotate_wall : MonoBehaviour
         if (mode == 0)
         {
             // 90度回転
-            wall.Rotate(0f, 0.5f, 0f);
+            wall.Rotate(0f, -0.5f, 0f);
             count++;
             if (count == 180)
             {
@@ -42,7 +42,7 @@ public class rotate_wall : MonoBehaviour
         else if (mode == 2)
         {
             // 90度回転
-            wall.Rotate(0f, -0.5f, 0f);
+            wall.Rotate(0f, 0.5f, 0f);
             count++;
             if (count == 180)
             {
