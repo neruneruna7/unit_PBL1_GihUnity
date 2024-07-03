@@ -9,6 +9,8 @@ TagManager:
   - speedup
   - HPup
   - jumpup
+  - confusion
+  - nomal
   layers:
   - Default
   - TransparentFX
