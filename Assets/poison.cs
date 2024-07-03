@@ -14,6 +14,19 @@ public class poison : MonoBehaviour
             if (player != null)
             {
                 player.TakeDamage(poisonDamage * Time.deltaTime); // 毎秒ダメージを与える
+                player.isPoisoned = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playercontroller player = other.GetComponent<playercontroller>();
+            if (player != null)
+            {
+                player.isPoisoned = false;
             }
         }
     }
