@@ -8,10 +8,12 @@ public class move : MonoBehaviour
     private Rigidbody rb;
 
     // 移動速度と回転速度の調整
-    float moveSpeed = 2f;  // 移動速度
-    float rotationSpeed = 10f; // 回転速度を増加
-    float jumpForce = 5f;  // ジャンプの強さ
-    float vision = 0f;
+    float moveSpeed ;  // 移動速度
+    float rotationSpeed ; // 回転速度を増加
+    float jumpForce ;  // ジャンプの強さ
+    float vision = 0f;//視点
+    int HP ;//HP
+    int confusion; //状態
 
     void Start()
     {
@@ -24,7 +26,12 @@ public class move : MonoBehaviour
         // ゲームのフレームレートを 60 FPS に設定
         Application.targetFrameRate = 60;
 
-        
+        // ステータス初期値設定
+        moveSpeed = 2f;
+        rotationSpeed = 2f;
+        jumpForce = 2f;
+        HP = 2;
+        confusion = 0;
     }
 
     void Update()
@@ -33,26 +40,48 @@ public class move : MonoBehaviour
         float moveHorizontal = 0f;
         float moveVertical = 0f;
 
-        
+        if (confusion == 0)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveVertical += 1f; // 前進
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveVertical -= 1f; // 後退
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveHorizontal += 1f; // 右移動
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveHorizontal -= 1f; // 左移動
+            }
+        }
 
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveVertical += 1f; // 前進
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveVertical -= 1f; // 後退
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveHorizontal += 1f; // 右移動
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveHorizontal -= 1f; // 左移動
-        }
         
+        
+        if (confusion == 1)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveVertical += 1f; // 前進
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveVertical -= 1f; // 後退
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveHorizontal += 1f; // 右移動
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveHorizontal -= 1f; // 左移動
+            }
+        } 
 
         
         // 視点の回転 (マウスの横移動で)
@@ -64,7 +93,6 @@ public class move : MonoBehaviour
         Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
         
         //移動処理
-        Vector3 velocity = moveDirection * moveSpeed * Time.deltaTime;
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
 
         // スペースキーでジャンプ
@@ -88,5 +116,38 @@ public class move : MonoBehaviour
         {
             isJumping = false;
         }
+        // ステータス選択時の操作
+        SelectStatus(col);
+        //混乱時の操作
+        StateConfusion(col);
+    }
+    void SelectStatus(Collision col)
+    {
+        if (col.gameObject.CompareTag("speedup"))
+        {
+            moveSpeed += 1f;
+        }
+
+        if (col.gameObject.CompareTag("jumpup"))
+        {
+            jumpForce += 1f;
+        }
+
+        if (col.gameObject.CompareTag("HPup"))
+        {
+            HP += 10;
+        }
+    }
+    void StateConfusion(Collision col)
+    {
+        if (col.gameObject.CompareTag("confusion"))
+        {
+            confusion = 1;
+        }
+        if (col.gameObject.CompareTag("nomal"))
+        {
+            confusion = 0;
+        }
     }
 }
+
