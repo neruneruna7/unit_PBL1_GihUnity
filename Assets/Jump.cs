@@ -18,7 +18,7 @@ Rigidbody rb ;
     {
         if(Input.GetKeyDown(KeyCode.Space)){
         if(isJumping == false){
-        rb.velocity = new Vector3(0,10,0);
+        rb.velocity = new Vector3(0,5,0);
        
         }
         isJumping = true;
