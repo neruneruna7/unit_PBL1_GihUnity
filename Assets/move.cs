@@ -9,6 +9,7 @@ public class move : MonoBehaviour
     private Rigidbody rb;
 
     // 移動速度と回転速度の調整
+<<<<<<< HEAD
     float moveSpeed;  // 移動速度
     float rotationSpeed; // 回転速度を増加
     float jumpForce;  // ジャンプの強さ
@@ -17,6 +18,12 @@ public class move : MonoBehaviour
 
     public TextMeshProUGUI SpeedText; // 移動速度表示用のUI
     public TextMeshProUGUI JumpText; // ジャンプ力表示用のUI
+=======
+    float moveSpeed = 2f;  // 移動速度
+    float rotationSpeed = 10f; // 回転速度を増加
+    float jumpForce = 5f;  // ジャンプの強さ
+    float vision = 0f;
+>>>>>>> d034d49dd6bd36c5b43974335154533b3632c788
 
     void Start()
     {
@@ -46,6 +53,9 @@ public class move : MonoBehaviour
         float moveHorizontal = 0f;
         float moveVertical = 0f;
 
+        
+
+
         if (Input.GetKey(KeyCode.W))
         {
             moveVertical += 1f; // 前進
@@ -62,7 +72,9 @@ public class move : MonoBehaviour
         {
             moveHorizontal -= 1f; // 左移動
         }
+        
 
+<<<<<<< HEAD
         if (confusion == 1)
         {
             if (Input.GetKey(KeyCode.D))
@@ -91,6 +103,19 @@ public class move : MonoBehaviour
         Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
 
         // 移動処理
+=======
+        
+        // 視点の回転 (マウスの横移動で)
+        vision = Input.GetAxis("Mouse X") * rotationSpeed ;
+        transform.Rotate(0f, vision, 0f);
+        
+
+        // 移動方向の計算
+        Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
+        
+        //移動処理
+        Vector3 velocity = moveDirection * moveSpeed * Time.deltaTime;
+>>>>>>> d034d49dd6bd36c5b43974335154533b3632c788
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
 
         // スペースキーでジャンプ
@@ -104,6 +129,7 @@ public class move : MonoBehaviour
             }
         }
     }
+
 
     void OnCollisionEnter(Collision col)
     {
