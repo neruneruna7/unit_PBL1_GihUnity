@@ -32,7 +32,7 @@ public class death_wall : MonoBehaviour
 
         if (is_active)
         {
-            position_now.x += 1f;
+            position_now.z += 1f;
 
             myTransform.position = position_now;
         }
