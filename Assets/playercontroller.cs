@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class playercontroller : MonoBehaviour
@@ -9,7 +8,7 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HealthText;
     [SerializeField] private TextMeshProUGUI GameOverText;
     public float maxHealth = 100f;
-    private float currentHealth;
+    public float currentHealth; // publicに変更
 
     void Start()
     {
@@ -35,6 +34,20 @@ public class playercontroller : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        SelectStatus(col);
+    }
+
+    public void SelectStatus(Collision col)
+    {
+        if (col.gameObject.CompareTag("HPup"))
+        {
+            currentHealth += 10f;
+            UpdateHealthText(); // HPの表示を更新
         }
     }
 

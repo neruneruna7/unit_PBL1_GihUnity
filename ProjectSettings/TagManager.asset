@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - speedup
+  - jumpup
+  - HPup
   layers:
   - Default
   - TransparentFX

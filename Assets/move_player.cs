@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class move : MonoBehaviour
+public class move_player : MonoBehaviour
 {
     private bool isJumping;
     private Rigidbody rb;
@@ -131,6 +131,7 @@ public class move : MonoBehaviour
             jumpForce += 1f;
             UpdateJumpText(); // ジャンプ力の表示を更新
         }
+
 
     }
 
