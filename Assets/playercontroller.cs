@@ -13,7 +13,9 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private Slider HealthBar;
 
     [SerializeField] private TextMeshProUGUI StateText;
-
+    [SerializeField] private TextMeshProUGUI LogText;
+    [SerializeField] private int maxLogLines = 5; // 最大行数
+    private List<string> logMessages = new List<string>(); // ログメッセージを保持するリスト
     public bool isPoisoned = false;
     private bool f_goal; //ゴールしたかどうか
 
@@ -25,6 +27,7 @@ public class playercontroller : MonoBehaviour
         UpdateHealthText(); // 初期HPの更新
         GameOverText.text = ""; // ゲームオーバーのテキストを空にする
         f_goal = false;
+        LogText.text = ""; // ログメッセージを空にする
     }
 
     void Update()
@@ -35,9 +38,24 @@ public class playercontroller : MonoBehaviour
     private void ChangeState(){
         if(isPoisoned){
             StateText.text = "Poison!";
+            WriteLog("Poisoned floor!");
         }else{
             StateText.text = "";
         }
+    }
+
+    public void WriteLog(string new_string)
+    {
+        logMessages.Add(new_string); // 新しいメッセージを追加
+
+        // 最大行数を超えた場合、古いメッセージを削除
+        if (logMessages.Count > maxLogLines)
+        {
+            logMessages.RemoveAt(0);
+        }
+
+        // ログメッセージをTextMeshProUGUIに表示
+        LogText.text = string.Join("\n", logMessages);
     }
 
     public void TakeDamage(float amount)
