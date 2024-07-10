@@ -40650,7 +40650,7 @@ GameObject:
   - component: {fileID: 719690506}
   m_Layer: 0
   m_Name: "\u30B4\u30FC\u30EB"
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50216,7 +50216,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   HealthBar: {fileID: 182899474}
-  StateText: {fileID: 516216133}
+  StateText: {fileID: 781323567}
   isPoisoned: 0
 --- !u!114 &1679269694
 MonoBehaviour:
