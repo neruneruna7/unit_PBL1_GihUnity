@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class playercontroller : MonoBehaviour
 {
@@ -121,7 +122,22 @@ public class playercontroller : MonoBehaviour
         Debug.Log("Player has died.");
         HealthText.text = ""; // HPの表示を空にする
         GameOverText.text = "Game Over"; // ゲームオーバーのメッセージを表示
+        // 3秒後にリトライ
+        StartCoroutine(Retry());
+
     }
+
+
+    private IEnumerator Retry()
+    {
+
+        // 3秒間待つ
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+    
 
     private void UpdateHealthText()
     {
