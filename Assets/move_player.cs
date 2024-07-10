@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class move : MonoBehaviour
+public class move_player : MonoBehaviour
 {
     private bool isJumping;
     private Rigidbody rb;
@@ -46,40 +46,34 @@ public class move : MonoBehaviour
         float moveHorizontal = 0f;
         float moveVertical = 0f;
 
-        if (confusion == 0)
+        if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.W))
-            {
-                moveVertical += 1f; // 前進
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                moveVertical -= 1f; // 後退
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                moveHorizontal += 1f; // 右移動
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                moveHorizontal -= 1f; // 左移動
-            }
+            moveVertical += 1f; // 前進
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveVertical -= 1f; // 後退
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveHorizontal += 1f; // 右移動
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveHorizontal -= 1f; // 左移動
         }
 
-
-        
-        
         if (confusion == 1)
         {
             if (Input.GetKey(KeyCode.D))
             {
                 moveVertical += 1f; // 前進
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.W))
             {
                 moveVertical -= 1f; // 後退
             }
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.A))
             {
                 moveHorizontal += 1f; // 右移動
             }
@@ -87,17 +81,16 @@ public class move : MonoBehaviour
             {
                 moveHorizontal -= 1f; // 左移動
             }
-        } 
+        }
 
-        
         // 視点の回転 (マウスの横移動で)
         vision = Input.GetAxis("Mouse X") * rotationSpeed;
         transform.Rotate(0f, vision, 0f);
 
         // 移動方向の計算
         Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
-        
-        //移動処理
+
+        // 移動処理
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.Self);
 
         // スペースキーでジャンプ
@@ -148,7 +141,7 @@ public class move : MonoBehaviour
         {
             confusion = 1;
         }
-        if (col.gameObject.CompareTag("nomal"))
+        else
         {
             confusion = 0;
         }

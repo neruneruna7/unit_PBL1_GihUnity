@@ -11,6 +11,7 @@ TagManager:
   - jumpup
   - confusion
   - nomal
+  - Goal
   layers:
   - Default
   - TransparentFX
