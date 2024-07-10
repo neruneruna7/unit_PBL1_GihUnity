@@ -8,6 +8,7 @@ TagManager:
   - speedup
   - jumpup
   - HPup
+  - Goal
   layers:
   - Default
   - TransparentFX
