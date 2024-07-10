@@ -58,7 +58,7 @@ public class playercontroller : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         SelectStatus(col);
-        CollisionGoal(col);
+        Goal(col);
     }
 
     public void SelectStatus(Collision col)
@@ -70,11 +70,12 @@ public class playercontroller : MonoBehaviour
         }
     }
 
-    void CollisionGoal(Collision col) {
+    void Goal(Collision col) {
         // 衝突した物体が「ゴール」なら（※）
         if (col.gameObject.CompareTag("Goal")) 
         {
             f_goal = true; // 衝突フラグを上げる
+            GameOverText.text = "Goal!!"; // ゴールメッセージを表示
         }
     }
 
