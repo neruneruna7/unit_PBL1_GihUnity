@@ -65,9 +65,6 @@ public class move : MonoBehaviour
                 moveHorizontal -= 1f; // 左移動
             }
         }
-
-
-        
         
         if (confusion == 1)
         {
@@ -87,7 +84,51 @@ public class move : MonoBehaviour
             {
                 moveHorizontal -= 1f; // 左移動
             }
-        } 
+        }
+
+        if (confusion == 2)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveVertical -= 1f; // 後退
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveHorizontal += 1f; // 右移動
+                
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveHorizontal -= 1f; // 左移動
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveVertical += 1f; // 前進
+            }
+        }  
+
+        if (confusion == 3)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveVertical += 1f; // 前進
+                moveHorizontal += 1f; // 右移動
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveVertical -= 1f; // 後退
+                
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveVertical -= 1f; // 後退
+                moveHorizontal -= 1f; // 左移動
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveHorizontal += 1f; // 右移動
+            }
+        }  
 
         
         // 視点の回転 (マウスの横移動で)
@@ -147,6 +188,14 @@ public class move : MonoBehaviour
         if (col.gameObject.CompareTag("confusion"))
         {
             confusion = 1;
+        }
+        if (col.gameObject.CompareTag("confusion2"))
+        {
+            confusion = 2;
+        }
+        if (col.gameObject.CompareTag("confusion3"))
+        {
+            confusion = 3;
         }
         if (col.gameObject.CompareTag("nomal"))
         {
