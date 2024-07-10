@@ -15,6 +15,7 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private TextMeshProUGUI StateText;
 
     public bool isPoisoned = false;
+    private bool f_goal; //ゴールしたかどうか
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class playercontroller : MonoBehaviour
 
         UpdateHealthText(); // 初期HPの更新
         GameOverText.text = ""; // ゲームオーバーのテキストを空にする
+        f_goal = false;
     }
 
     void Update()
@@ -56,6 +58,7 @@ public class playercontroller : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         SelectStatus(col);
+        CollisionGoal(col);
     }
 
     public void SelectStatus(Collision col)
@@ -64,6 +67,14 @@ public class playercontroller : MonoBehaviour
         {
             currentHealth += 10f;
             UpdateHealthText(); // HPの表示を更新
+        }
+    }
+
+    void CollisionGoal(Collision col) {
+        // 衝突した物体が「ゴール」なら（※）
+        if (col.gameObject.CompareTag("Goal")) 
+        {
+            f_goal = true; // 衝突フラグを上げる
         }
     }
 

@@ -156,11 +156,11 @@ public class move : MonoBehaviour
 
     void UpdateSpeedText()
     {
-        SpeedText.text = "Speed: " + moveSpeed.ToString("F1");
+        SpeedText.text = moveSpeed.ToString("F1");
     }
 
     void UpdateJumpText()
     {
-        JumpText.text = "Jump: " + jumpForce.ToString("F1");
+        JumpText.text = jumpForce.ToString("F1");
     }
 }
