@@ -17,6 +17,7 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private int maxLogLines = 5; // 最大行数
     private List<string> logMessages = new List<string>(); // ログメッセージを保持するリスト
     public bool isPoisoned = false;
+    public bool isDark = false;
     private bool f_goal; //ゴールしたかどうか
 
     void Start()
@@ -39,7 +40,11 @@ public class playercontroller : MonoBehaviour
         if(isPoisoned){
             StateText.text = "Poison!";
             WriteLog("Poisoned floor!");
-        }else{
+        }else if(isDark) {
+            StateText.text = "Dark!";
+            WriteLog("Darkness Area!");
+        }
+        else{
             StateText.text = "";
         }
     }
@@ -77,6 +82,7 @@ public class playercontroller : MonoBehaviour
     {
         SelectStatus(col);
         Goal(col);
+        Dark(col);
     }
 
     public void SelectStatus(Collision col)
@@ -96,6 +102,18 @@ public class playercontroller : MonoBehaviour
             GameOverText.text = "Goal!!"; // ゴールメッセージを表示
         }
     }
+    void Dark(Collision col) {
+        // 衝突した物体が「ゴール」なら（※）
+        if (col.gameObject.CompareTag("dark")) 
+        {
+            isDark = true; // 衝突フラグを上げる
+            StateText.text = "Dark!!";
+            LogText.text = "Dark!!"; 
+        }else{
+            isDark = false;
+        }
+    }
+    
 
     private void Die()
     {
