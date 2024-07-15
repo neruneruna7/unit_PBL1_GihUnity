@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class playercontroller : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class playercontroller : MonoBehaviour
     [SerializeField] private Slider HealthBar;
 
     [SerializeField] private TextMeshProUGUI StateText;
-
+    [SerializeField] private TextMeshProUGUI LogText;
+    [SerializeField] private int maxLogLines = 5; // 最大行数
+    private List<string> logMessages = new List<string>(); // ログメッセージを保持するリスト
     public bool isPoisoned = false;
+    public bool isDark = false;
+    private bool f_goal; //ゴールしたかどうか
 
     void Start()
     {
@@ -23,6 +28,8 @@ public class playercontroller : MonoBehaviour
 
         UpdateHealthText(); // 初期HPの更新
         GameOverText.text = ""; // ゲームオーバーのテキストを空にする
+        f_goal = false;
+        LogText.text = ""; // ログメッセージを空にする
     }
 
     void Update()
@@ -33,9 +40,28 @@ public class playercontroller : MonoBehaviour
     private void ChangeState(){
         if(isPoisoned){
             StateText.text = "Poison!";
-        }else{
+            WriteLog("Poisoned floor!");
+        }else if(isDark) {
+            StateText.text = "Dark!";
+            WriteLog("Darkness Area!");
+        }
+        else{
             StateText.text = "";
         }
+    }
+
+    public void WriteLog(string new_string)
+    {
+        logMessages.Add(new_string); // 新しいメッセージを追加
+
+        // 最大行数を超えた場合、古いメッセージを削除
+        if (logMessages.Count > maxLogLines)
+        {
+            logMessages.RemoveAt(0);
+        }
+
+        // ログメッセージをTextMeshProUGUIに表示
+        LogText.text = string.Join("\n", logMessages);
     }
 
     public void TakeDamage(float amount)
@@ -56,6 +82,8 @@ public class playercontroller : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         SelectStatus(col);
+        Goal(col);
+        Dark(col);
     }
 
     public void SelectStatus(Collision col)
@@ -67,13 +95,49 @@ public class playercontroller : MonoBehaviour
         }
     }
 
+    void Goal(Collision col) {
+        // 衝突した物体が「ゴール」なら（※）
+        if (col.gameObject.CompareTag("Goal")) 
+        {
+            f_goal = true; // 衝突フラグを上げる
+            GameOverText.text = "Goal!!"; // ゴールメッセージを表示
+        }
+    }
+    void Dark(Collision col) {
+        // 衝突した物体が「ゴール」なら（※）
+        if (col.gameObject.CompareTag("dark")) 
+        {
+            isDark = true; // 衝突フラグを上げる
+            StateText.text = "Dark!!";
+            LogText.text = "Dark!!"; 
+        }else{
+            isDark = false;
+        }
+    }
+    
+
     private void Die()
     {
         // プレイヤーの死亡処理
         Debug.Log("Player has died.");
         HealthText.text = ""; // HPの表示を空にする
         GameOverText.text = "Game Over"; // ゲームオーバーのメッセージを表示
+        // 3秒後にリトライ
+        StartCoroutine(Retry());
+
     }
+
+
+    private IEnumerator Retry()
+    {
+
+        // 3秒間待つ
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+    
 
     private void UpdateHealthText()
     {

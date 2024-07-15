@@ -12,6 +12,7 @@ TagManager:
   - confusion
   - nomal
   - Goal
+  - dark
   layers:
   - Default
   - TransparentFX
