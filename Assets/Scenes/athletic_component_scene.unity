@@ -41949,7 +41949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6af57b462266634bab82e593baba844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallToMove: {fileID: 0}
+  wallToMove: {fileID: 392556295}
   openPosition: {x: -16.5, y: 1, z: 13}
   moveSpeed: 5
 --- !u!114 &839700869
@@ -51298,7 +51298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6af57b462266634bab82e593baba844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallToMove: {fileID: 0}
+  wallToMove: {fileID: 1756225784}
   openPosition: {x: 6.5, y: 1, z: 8}
   moveSpeed: 5
 --- !u!114 &1887106093
